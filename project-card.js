@@ -73,7 +73,6 @@ class ProjectCard extends HTMLElement {
         wrapper.appendChild(titleElem);
         wrapper.appendChild(imgElem);
         wrapper.appendChild(descElem);
-        wrapper.appendChild(linkElem);
     }
 }
 
