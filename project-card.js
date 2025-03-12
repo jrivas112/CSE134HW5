@@ -10,14 +10,14 @@ class ProjectCard extends HTMLElement {
         title.textContent = this.getAttribute('title');
 
         const img = document.createElement('img');
-        img.src = this.getAttribute('img');
-        img.alt = this.getAttribute('alt');
+        img.src = this.getAttribute('img') || '';
+        img.alt = this.getAttribute('alt') || 'Project image';
 
         const description = document.createElement('p');
         description.textContent = this.getAttribute('description');
 
         const link = document.createElement('a');
-        link.href = this.getAttribute('link');
+        link.href = this.getAttribute('link') || '#';
         link.textContent = 'Read More →';
         link.target = '_blank';
 
@@ -59,17 +59,8 @@ class ProjectCard extends HTMLElement {
         shadow.append(style, wrapper);
     }
 
-    connectedCallback() {
-        const imgSrc = this.getAttribute('img');
-        const altText = this.getAttribute('alt');
-
-        const img = document.createElement('img');
-        img.src = img.src = img.src = this.getAttribute('img') || '';
-        img.alt = altText || 'Project image';
-
-        const wrapper = this.shadowRoot.querySelector('.card');
-        wrapper.insertBefore(img, wrapper.querySelector('a'));
-    }
+    // connectedCallback can be used for attribute changes or initialization
+    // but we don't need it for this basic implementation
 }
 
 customElements.define('project-card', ProjectCard);
