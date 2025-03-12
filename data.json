@@ -1,0 +1,19 @@
+{
+    "projects": [
+      {
+        "title": "Gen Z Work Journal",
+        "image": "./images/controlled.webp",
+        "alt": "Screenshot of Gen Z Journal",
+        "description": "Daily task management and creative play.",
+        "link": "https://example.com/genz"
+      },
+      {
+        "title": "Network Device Tracker",
+        "image": "./assets/networkinventory.webp",
+        "alt": "Screenshot of Network Tracker App",
+        "description": "Track your network devices easily.",
+        "link": "https://example.com/network-tracker"
+      }
+    ]
+  }
+  
