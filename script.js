@@ -2,27 +2,27 @@
 
 // Sample project data
 const sampleProjects = [
-    {
-      title: "Personal Portfolio",
-      image: "assets/portfolio.jpg",
-      alt: "Portfolio website screenshot",
-      description: "A responsive portfolio website built with HTML, CSS, and JavaScript.",
-      link: "https://github.com/jrivas112/portfolio"
-    },
-    {
-      title: "Task Manager App",
-      image: "assets/taskmanager.jpg",
-      alt: "Task manager application",
-      description: "A task management application with local storage functionality.",
-      link: "https://github.com/jrivas112/task-manager"
-    },
-    {
-      title: "Weather Dashboard",
-      image: "assets/weather.jpg",
-      alt: "Weather dashboard application",
-      description: "A weather dashboard that uses a third-party API to retrieve weather data.",
-      link: "https://github.com/jrivas112/weather-app"
-    }
+  {
+    title: "SSDM Project",
+    image: "./assets/adverproj.webp",
+    alt: "Advertisement Project Screenshot",
+    description: "The SSDM project tracks vehicles entering and exiting a dealership's service drive using RFID technology, capturing VIN numbers to identify customers and display a personalized welcome message on a multimedia dashboard. It utilizes four RFID devices—one at entry and three at exit points—to log vehicle movements, match VINs in a database, and monitor repair order activity. A real-time monitoring dashboard provides a graphical representation of vehicle locations, tracks customer visits, and records how many customers open or do not open a repair order.",
+    link: "https://rivasjulio047.wixsite.com/juliorivas"
+  },
+  {
+    title: "Network Inventory",
+    image: "./assets/networkinventory.webp",
+    alt: "Network Inventory Project Screenshot",
+    description: "The Network Inventory System is designed to track all network devices, including computers, printers, and servers, while managing IP addresses to prevent duplicate assignments. It also monitors device counts per department and provides a filtering system to view specific device types or departments. The system includes a demo showcasing its ability to organize and display network data efficiently.",
+    link: "https://rivasjulio047.wixsite.com/juliorivas"
+  },
+  {
+    title: "Controlled Advertisement",
+    image: "./assets/controlled.webp",
+    alt: "Controlled Advertisement Project Screenshot",
+    description: "The Controlled Advertisement For Businesses project was developed to reduce software costs by replacing a $1,200-per-year advertisement system with an in-house solution. This custom dashboard manages and loops stored videos throughout the day, featuring Toyota dealership advertisements for branding and comedy videos for customer entertainment. The system ensures a cost-effective way to engage showroom visitors while maintaining control over displayed content.",
+    link: "https://rivasjulio047.wixsite.com/juliorivas"
+  }
   ];
   
   // Function to initialize local storage with sample data if it doesn't exist
@@ -71,31 +71,39 @@ const sampleProjects = [
   
   // Function to load data from remote server (JSONBin)
   function loadRemoteData() {
-    // Replace with your actual JSONBin ID or My JSON Server URL
-    const remoteUrl = 'https://api.jsonbin.io/v3/b/YOUR_BIN_ID';
-    
-    fetch(remoteUrl, {
-      headers: {
-        // Include any required headers for your chosen service
-        // For JSONBin: 'X-Master-Key': 'YOUR_MASTER_KEY'
-      }
-    })
+    // First try My JSON Server
+    fetch('https://my-json-server.typicode.com/jrivas112/CSE134HW5/projects')
       .then(response => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('My JSON Server failed, trying JSONBin');
         }
         return response.json();
       })
-      .then(data => {
-        // For JSONBin, the actual data is in the 'record' property
-        // Adjust this according to your chosen service's response format
-        const projects = data.record || data;
+      .then(projects => {
         loadProjects(projects);
-        console.log('Loaded projects from remote server');
+        console.log('Loaded projects from My JSON Server');
       })
       .catch(error => {
-        console.error('Error fetching remote data:', error);
-        alert('Error loading data from remote server');
+        console.warn(error.message);
+        
+        // If My JSON Server fails, try JSONBin
+        fetch('https://api.jsonbin.io/v3/b/67d12bae8a456b7966742fe1')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('JSONBin response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            // Extract projects from JSONBin response
+            const projects = data.record.projects || data.record;
+            loadProjects(projects);
+            console.log('Loaded projects from JSONBin');
+          })
+          .catch(jsonbinError => {
+            console.error('Error fetching from JSONBin:', jsonbinError);
+            alert('Failed to load data from both remote sources');
+          });
       });
   }
   
