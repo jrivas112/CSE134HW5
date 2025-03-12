@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Portfolio</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+            input:required, textarea:required {
+            border: 2px solid red;
+        }
+
+        textarea:valid, 
+        input:valid:not([type="submit"]) {
+            border: 2px solid green;
+        }
+        
+        /* Style invalid inputs */
+        input:invalid, textarea:invalid {
+            border: 2px solid red;
+        }
+        
+        /* Style placeholder text */
+        input:placeholder-shown {
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <hgroup>
+            <h1>Contact Me</h1>
+            <p><a href="https://github.com/jrivas112" target="_blank">GitHub Repository</a></p>
+        </hgroup>
+
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html">Contact and Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contact-container">
+        <section class="contact-form">
+            <h2>Lets Work Together!</h2>
+            <form action="https://httpbin.org/post" method="POST">
+                <fieldset>
+                    <legend>Contact Form</legend>
+    
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required minlength="3" maxlength="50" pattern="[A-Za-z ]+">
+    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+    
+                    <label for="organization">Organization:</label>
+                    <input type="text" id="organization" name="organization" minlength="2" maxlength="100" pattern="[A-Za-z0-9 ]*">
+    
+                    <label for="comments">Message (Max 200 characters, No special characters):</label>
+                    <textarea id="comments" name="comments" required maxlength="200" pattern="[A-Za-z0-9 ]*"></textarea>
+    
+                    <input type="hidden" name="possible_bot" value="true">
+    
+                    <input type="submit" name="submit" value="Submit">
+    
+                    <!-- Output Elements for Messages -->
+                    <output class="error-message" id="errorMessage"></output>
+                    <output class="info-message" id="infoMessage"></output>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Follow me on <a href="www.linkedin.com/in/juliomidence">LinkedIn</a>.</p>
+    </footer>
+
+</body>
+</html>

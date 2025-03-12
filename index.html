@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Portfolio</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <meta name="author" content="Julio Rivas">
+</head>
+<body>
+
+    <header>
+        <hgroup>
+            <h1>Julio Rivas's Portfolio</h1>
+            <p><a href="https://github.com/jrivas112" target="_blank">GitHub Repository</a></p>
+        </hgroup>
+
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html">Contact and Resume</a></li>
+            </ul>
+        </nav>
+
+        <div class="no-js-message">Theme switching requires JavaScript to be enabled</div>
+        <div class="js-enabled">
+        <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>Welcome to My Portfolio</h2>
+            <h2>Education</h2>
+            <p>UC San Diego</p>
+            <p>Major: Computer Engineering</p>
+            <section>
+                <h3>CS Courses</h3>
+                <ul>
+                    <li>Software Engineering</li>
+                    <li>Computer Networks</li>
+                    <li>Operating Systems</li>
+                    <li>Component and Design Techniques for Digital Systems</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Electrical Engineering</h3>
+                <ul>
+                    <li>Introduction to Analog Design</li>
+                    <li>Circuit and Systems</li>
+                </ul>
+            </section>
+        </section>
+        
+        <aside class="sidebar">
+            <img src="assets/profile.jpg" alt="Profile Picture">
+        </aside>
+        <section class="projects">
+            <h3>Featured Projects</h3>
+            <ul class="project-list">
+                <li>
+                    <h4>SSDM Project</h4>
+                    <img src="assets/adverproj.webp" alt="Advertisement Project Screenshot">
+                    <br>The SSDM project tracks vehicles entering and exiting a dealership's service drive using RFID technology, capturing VIN numbers to identify customers and display a personalized welcome message on a multimedia dashboard. It utilizes four RFID devices—one at entry and three at exit points—to log vehicle movements, match VINs in a database, and monitor repair order activity. A real-time monitoring dashboard provides a graphical representation of vehicle locations, tracks customer visits, and records how many customers open or do not open a repair order.
+                </li>
+                <li>
+                    <h4>Network Inventory</h4>
+                    <img src="assets/networkinventory.webp" alt="Network Inventory Project Screenshot">
+                    <br>The Network Inventory System is designed to track all network devices, including computers, printers, and servers, while managing IP addresses to prevent duplicate assignments. It also monitors device counts per department and provides a filtering system to view specific device types or departments. The system includes a demo showcasing its ability to organize and display network data efficiently.
+                </li>
+                <li>
+                    <h4>Controlled Advertisement</h4>
+                    <img src="assets/controlled.webp" alt="Controlled Advertisement Project Screenshot">
+                    <p>The Controlled Advertisement For Businesses project was developed to reduce software costs by replacing a $1,200-per-year advertisement system with an in-house solution. This custom dashboard manages and loops stored videos throughout the day, featuring Toyota dealership advertisements for branding and comedy videos for customer entertainment. The system ensures a cost-effective way to engage showroom visitors while maintaining control over displayed content.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section class="about">
+            <h3>About Me</h3>
+             Hello everyone! My name is Julio Rivas. I'm currently a Computer Engineering student at UC San Diego.
+            <h3>Hobbies:</h3>
+            <ul>
+                <li>Playing video games</li>
+                <li>Watching movies</li>
+                <li>Reading books</li>
+                <li>Lifting Weights</li>
+            </ul>
+            <h3>Favorite Computer Science Topics</h3>
+            <ol>
+                <li>Software Engineering</li>
+                <li>Computer Networks</li>
+                <li>Operating Systems</li>
+        </section>
+    </main>
+
+    <footer>
+        <p>Follow me on:</p>
+        <a href="www.linkedin.com/in/juliomidence">LinkedIn</a>
+    </footer>
+    <script>
+                    // JavaScript
+        document.body.parentElement.classList.add('js-enabled');
+
+        const toggleButton = document.querySelector('.theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+            toggleButton.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Toggle theme
+        toggleButton.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            toggleButton.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+</script>
+</body>
+</html>

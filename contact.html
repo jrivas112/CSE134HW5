@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Portfolio</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Styles */
+        .error-message {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .warning {
+            color: orange;
+        }
+
+        .warning2 {
+            color: red;
+        }
+
+        input.invalid, textarea.invalid {
+            border: 2px solid red;
+            animation: flash 0.3s ease-in-out;
+        }
+
+        @keyframes flash {
+            0% { background-color: #ffdddd; }
+            100% { background-color: white; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <hgroup>
+            <h1>Contact Me</h1>
+            <p><a href="https://github.com/jrivas112" target="_blank">GitHub Repository</a></p>
+        </hgroup>
+
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html">Contact and Resume</a></li>
+            </ul>
+        </nav>
+
+        <div class="no-js-message">Theme switching requires JavaScript to be enabled</div>
+        <div class="js-enabled">
+        <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+    </div>
+    </header>
+
+    <main class="contact-container">
+        <section class="resume-section">
+            <h2>Resume</h2>
+            <iframe src="docs/resume.pdf" width="100%" height="80%"></iframe>
+        </section>
+
+        <section class="contact-form">
+            <h2>Let's Work Together!</h2>
+            <form id="contactForm" action="https://httpbin.org/post" method="POST" novalidate>
+                <fieldset>
+                    <legend>Contact Form</legend>
+    
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required minlength="3" maxlength="50" pattern="[A-Za-z ]+">
+                    <span class="error-message" id="nameError"></span>
+    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <span class="error-message" id="emailError"></span>
+
+                    <label for="organization">Organization:</label>
+                    <input type="text" id="organization" name="organization" minlength="2" maxlength="100" pattern="[A-Za-z0-9 ]*">
+                    <span class="error-message" id="organizationError"></span>
+    
+                    <label for="comments">Message (Max 200 characters, No special characters):</label>
+                    <textarea id="comments" name="comments" required maxlength="200" pattern="[A-Za-z0-9 ]*"></textarea>
+                    <span id="charCount">200 characters remaining</span>
+                    <span class="error-message" id="commentsError"></span>
+    
+                    <input type="hidden" name="possible_bot" value="true">
+
+                    <!-- Hidden input to store form errors -->
+                    <input type="hidden" id="form-errors" name="form-errors" value="[]">
+    
+                    <input type="submit" name="submit" value="Submit">
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Follow me on <a href="www.linkedin.com/in/juliomidence">LinkedIn</a>.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("contactForm");
+            const formErrors = [];
+            const charCounter = document.getElementById("charCount");
+
+            // Form Fields
+            const fields = {
+                name: document.getElementById("name"),
+                email: document.getElementById("email"),
+                organization: document.getElementById("organization"),
+                comments: document.getElementById("comments"),
+            };
+
+            // Error messages
+            const errors = {
+                name: document.getElementById("nameError"),
+                email: document.getElementById("emailError"),
+                organization: document.getElementById("organizationError"),
+                comments: document.getElementById("commentsError"),
+            };
+
+            // Masking invalid input
+            function enforcePattern(event, regex, field, errorMsg) {
+                if (!regex.test(event.key) && event.key !== "Backspace") {
+                    event.preventDefault();
+                    field.classList.add("invalid");
+                    errors[field.id].textContent = errorMsg;
+                    errors[field.id].style.display = "inline";
+                    setTimeout(() => {
+                        field.classList.remove("invalid");
+                        errors[field.id].style.display = "none";
+                    }, 2000);
+                }
+            }
+            function validateInput(field, regex, errorMsg) {
+                const currentValue = field.value;
+                if (regex.test(currentValue)) { // Check if invalid characters exist
+                    field.classList.add("invalid");
+                    errors[field.id].textContent = errorMsg;
+                    errors[field.id].style.display = "inline";
+
+                    // Clear warning after 2 seconds
+                    setTimeout(() => {
+                        errors[field.id].style.display = "none";
+                        field.classList.remove("invalid");
+                    }, 2000);
+                } else {
+                    errors[field.id].style.display = "none";
+                    field.classList.remove("invalid");
+                }
+            }
+
+            // Event Listeners for Input Validation
+            fields.name.addEventListener("input", () => validateInput(fields.name, /[^A-Za-z\s]/g, "Only letters and spaces recommended."));
+            fields.organization.addEventListener("input", () => validateInput(fields.organization, /[^A-Za-z0-9\s]/g, "Only letters, numbers, and spaces recommended."));
+            fields.comments.addEventListener("input", () => validateInput(fields.comments, /[^A-Za-z0-9\s]/g, "Only letters, numbers, and spaces recommended."));
+
+            // Character countdown for comments field
+            fields.comments.addEventListener("input", () => {
+                const remaining = 200 - fields.comments.value.length;
+                charCounter.textContent = `${remaining} characters remaining`;
+                charCounter.classList.toggle("warning", remaining <= 20);
+                charCounter.classList.toggle("warning2", remaining <= 0);
+            });
+
+            // Validation on submit (warn but allow submission)
+            form.addEventListener("submit", () => {
+                formErrors.length = 0; // Reset errors
+
+                Object.entries(fields).forEach(([key, field]) => {
+                    if (!field.checkValidity()) {
+                        formErrors.push({ field: key, message: field.validationMessage });
+                        errors[key].textContent = field.validationMessage;
+                        errors[key].style.display = "inline";
+                        field.classList.add("invalid");
+                        setTimeout(() => {
+                            errors[key].style.display = "none";
+                        }, 3000);
+                    } else {
+                        errors[key].style.display = "none";
+                        field.classList.remove("invalid");
+                    }
+                });
+
+                // Store errors in hidden input for submission
+                document.getElementById("form-errors").value = JSON.stringify(formErrors);
+                console.log("Form Errors Sent:", formErrors);
+            });
+
+            // JavaScript
+        document.body.parentElement.classList.add('js-enabled');
+
+            const toggleButton = document.querySelector('.theme-toggle');
+            const htmlElement = document.documentElement;
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                htmlElement.setAttribute('data-theme', savedTheme);
+                toggleButton.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+            }
+
+            // Toggle theme
+            toggleButton.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                htmlElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                toggleButton.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            });
+        });
+    </script>
+
+</body>
+</html>
