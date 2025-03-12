@@ -1,18 +1,25 @@
 {
     "projects": [
       {
-        "title": "Gen Z Work Journal",
-        "image": "./images/controlled.webp",
-        "alt": "Screenshot of Gen Z Journal",
-        "description": "Daily task management and creative play.",
-        "link": "https://example.com/genz"
+        "title": "SSDM Project",
+        "image": "./assets/adverproj.webp",
+        "alt": "Advertisement Project Screenshot",
+        "description": "The SSDM project tracks vehicles entering and exiting a dealership's service drive using RFID technology, capturing VIN numbers to identify customers and display a personalized welcome message on a multimedia dashboard.",
+        "link": "#"
       },
       {
-        "title": "Network Device Tracker",
+        "title": "Network Inventory",
         "image": "./assets/networkinventory.webp",
-        "alt": "Screenshot of Network Tracker App",
-        "description": "Track your network devices easily.",
-        "link": "https://example.com/network-tracker"
+        "alt": "Network Inventory Project Screenshot",
+        "description": "The Network Inventory System is designed to track all network devices, including computers, printers, and servers, while managing IP addresses to prevent duplicate assignments.",
+        "link": "#"
+      },
+      {
+        "title": "Controlled Advertisement",
+        "image": "./assets/controlled.webp",
+        "alt": "Controlled Advertisement Project Screenshot",
+        "description": "The Controlled Advertisement For Businesses project reduces costs by replacing an expensive advertisement system with an in-house solution that loops branding and entertainment videos.",
+        "link": "#"
       }
     ]
   }
