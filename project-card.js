@@ -4,7 +4,7 @@ class ProjectCard extends HTMLElement {
         const shadow = this.attachShadow({ mode: 'open' });
 
         const wrapper = document.createElement('div');
-        wrapper.setAttribute('class', 'card');
+        wrapper.classList.add('card');
 
         const title = document.createElement('h4');
         title.textContent = this.getAttribute('title');
@@ -29,46 +29,23 @@ class ProjectCard extends HTMLElement {
                 border-radius: 12px;
                 padding: 16px;
                 margin: 16px;
-                max-width: 350px;
+                max-width: 400px;
                 font-family: 'Poppins', sans-serif;
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
             }
-
             img {
                 max-width: 100%;
                 border-radius: 8px;
             }
-
             a {
                 color: #007bff;
                 text-decoration: none;
             }
-
-            a:hover {
-                text-decoration: underline;
-            }
         `;
-
-        wrapper.appendChild(title);
-        wrapper.appendChild(img);
-        wrapper.appendChild(description);
-        wrapper.appendChild(link);
-
         shadow.append(style, wrapper);
-    }
-
-    connectedCallback() {
-        const imgSrc = this.getAttribute('img');
-        const altText = this.getAttribute('alt');
-
-        const img = document.createElement('img');
-        img.src = img.src = img.src = this.getAttribute('img') || '';
-        img.alt = altText || 'Project image';
-
-        const wrapper = this.shadowRoot.querySelector('.card');
-        wrapper.insertBefore(img, wrapper.querySelector('a'));
+        wrapper.append(title, img, description, link);
     }
 }
 
