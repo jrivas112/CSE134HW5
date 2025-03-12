@@ -355,3 +355,32 @@ noscript .no-js-message {
     flex-wrap: wrap;
   }
   
+  .data-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .data-buttons button {
+    background-color: var(--accent-color, #007bff);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s;
+  }
+  
+  .data-buttons button:hover {
+    background-color: var(--accent-hover, #0056b3);
+  }
+  
+  /* For dark theme compatibility */
+  [data-theme="dark"] .data-buttons button {
+    background-color: var(--accent-color-dark, #4da6ff);
+  }
+  
+  [data-theme="dark"] .data-buttons button:hover {
+    background-color: var(--accent-hover-dark, #80bdff);
+  }

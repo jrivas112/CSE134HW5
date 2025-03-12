@@ -1,0 +1,32 @@
+{
+    "projects": [
+      {
+        "title": "E-commerce Website",
+        "image": "assets/ecommerce.jpg",
+        "alt": "E-commerce website screenshot",
+        "description": "A fully functional e-commerce platform with product listings and shopping cart.",
+        "link": "https://github.com/jrivas112/ecommerce"
+      },
+      {
+        "title": "Neural Network Visualizer",
+        "image": "assets/neural.jpg",
+        "alt": "Neural network visualization",
+        "description": "An interactive visualization tool for understanding neural networks.",
+        "link": "https://github.com/jrivas112/neural-viz"
+      },
+      {
+        "title": "Augmented Reality App",
+        "image": "assets/ar-app.jpg",
+        "alt": "AR application screenshot",
+        "description": "An AR application that overlays digital content onto the real world.",
+        "link": "https://github.com/jrivas112/ar-app"
+      },
+      {
+        "title": "Blockchain Explorer",
+        "image": "assets/blockchain.jpg",
+        "alt": "Blockchain explorer interface",
+        "description": "A tool for visualizing and exploring blockchain transactions.",
+        "link": "https://github.com/jrivas112/blockchain-explorer"
+      }
+    ]
+  }
