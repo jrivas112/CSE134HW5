@@ -64,10 +64,7 @@ class ProjectCard extends HTMLElement {
         const descElem = document.createElement('p');
         descElem.textContent = description;
         
-        const linkElem = document.createElement('a');
-        linkElem.href = linkHref;
-        linkElem.textContent = 'Read More →';
-        linkElem.target = '_blank';
+
         
         // Append all elements to the wrapper
         wrapper.appendChild(titleElem);
