@@ -3,24 +3,11 @@ class ProjectCard extends HTMLElement {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
 
+        // Create main wrapper
         const wrapper = document.createElement('div');
         wrapper.setAttribute('class', 'card');
 
-        const title = document.createElement('h4');
-        title.textContent = this.getAttribute('title');
-
-        const img = document.createElement('img');
-        img.src = this.getAttribute('img') || '';
-        img.alt = this.getAttribute('alt') || 'Project image';
-
-        const description = document.createElement('p');
-        description.textContent = this.getAttribute('description');
-
-        const link = document.createElement('a');
-        link.href = this.getAttribute('link') || '#';
-        link.textContent = 'Read More →';
-        link.target = '_blank';
-
+        // Create style
         const style = document.createElement('style');
         style.textContent = `
             .card {
@@ -51,16 +38,43 @@ class ProjectCard extends HTMLElement {
             }
         `;
 
-        wrapper.appendChild(title);
-        wrapper.appendChild(img);
-        wrapper.appendChild(description);
-        wrapper.appendChild(link);
-
-        shadow.append(style, wrapper);
+        // Append style first
+        shadow.appendChild(style);
+        shadow.appendChild(wrapper);
     }
 
-    // connectedCallback can be used for attribute changes or initialization
-    // but we don't need it for this basic implementation
+    connectedCallback() {
+        const wrapper = this.shadowRoot.querySelector('.card');
+        
+        // Get attribute values
+        const title = this.getAttribute('title') || 'Project Title';
+        const imgSrc = this.getAttribute('img') || '';
+        const altText = this.getAttribute('alt') || 'Project image';
+        const description = this.getAttribute('description') || '';
+        const linkHref = this.getAttribute('link') || '#';
+        
+        // Create elements
+        const titleElem = document.createElement('h4');
+        titleElem.textContent = title;
+        
+        const imgElem = document.createElement('img');
+        imgElem.src = imgSrc;
+        imgElem.alt = altText;
+        
+        const descElem = document.createElement('p');
+        descElem.textContent = description;
+        
+        const linkElem = document.createElement('a');
+        linkElem.href = linkHref;
+        linkElem.textContent = 'Read More →';
+        linkElem.target = '_blank';
+        
+        // Append all elements to the wrapper
+        wrapper.appendChild(titleElem);
+        wrapper.appendChild(imgElem);
+        wrapper.appendChild(descElem);
+        wrapper.appendChild(linkElem);
+    }
 }
 
 customElements.define('project-card', ProjectCard);
